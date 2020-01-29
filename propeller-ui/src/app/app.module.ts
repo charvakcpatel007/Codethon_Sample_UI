@@ -25,7 +25,7 @@ import { FormsModule } from '@angular/forms'
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
     TabsModule.forRoot()
   ],
   providers: [],
