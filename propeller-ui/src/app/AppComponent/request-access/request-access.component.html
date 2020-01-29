@@ -1,1 +1,106 @@
-<p>request-access works!</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xs-3 col-sm-3">
+              <label>BU:</label>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+              {{ requestAccess?.businessUnit }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 col-sm-3">
+              <label>Division:</label>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+              {{ requestAccess?.division }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 col-sm-3">
+              <label>Super Department:</label>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+              {{ requestAccess?.superDepartment }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 col-sm-3">
+              <label>Department:</label>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+              {{ requestAccess?.department }}
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xs-3 col-sm-3">
+              <label>Project:</label>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+              <select name="project" [(ngModel)]="requestAccess.projectSelected" class="form-control" id="project">
+                <option *ngFor="let p of requestAccess.projects" [ngValue]="p.name"> {{ p.name }} </option>
+              </select>
+            </div>
+          </div>
+          <div class="row"></div>
+          <div class="row">
+            <div class="col-xs-3 col-sm-3">
+              <label>Access Bundles:</label>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+
+            <select name="accessBundle" [(ngModel)]="requestAccess.accessBundleSelected" class="form-control" id="accessBundle">
+              <option *ngFor="let ab of requestAccess.accessBundles" [ngValue]="ab.name"> {{ ab.name }} </option>
+            </select>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Select</th>
+                      <th scope="col">Resource Type</th>
+                      <th scope="col">Resource Name</th>
+                      <th scope="col">Resource Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let r of requestAccess.resourceList; let i = index;">
+                      <td>
+                        <div>
+                            <input type="checkbox" [id]="'customCheck'+i" [(ngModel)]="r.isSelected"/>
+                        </div>
+                      </td>
+                      <td>{{ r.resourceType }}</td>
+                      <td>{{ r.resourceName }}</td>
+                      <td>{{ r.resourceValue }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <button (click)="makeServiceCall()">Initiate Process</button>
+        </div>
+      </div>
+    </div>
+  </div>
