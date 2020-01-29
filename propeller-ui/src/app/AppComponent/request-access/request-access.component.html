@@ -67,8 +67,8 @@
           <div class="container">
             <div class="row">
               <div class="col-12">
-                <table class="table table-bordered">
-                  <thead>
+                <table class="table">
+                  <thead class="thead-light">
                     <tr>
                       <th scope="col">Select</th>
                       <th scope="col">Resource Type</th>
@@ -99,7 +99,7 @@
     <div class="col-xs-12 col-sm-12">
       <div class="card">
         <div class="card-body">
-          <button (click)="makeServiceCall()">Initiate Process</button>
+          <button class="btn btn-success float-right" (click)="initiateAccessRequestProcess()">Initiate Process</button>
         </div>
       </div>
     </div>
