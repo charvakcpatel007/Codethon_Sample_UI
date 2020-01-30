@@ -4,7 +4,7 @@ export const TAI_TYPE : string = "TAI"
 export interface AccessEntity {
     type: string;
     group : string;//FDG
-    eondId: string;
+    eonId: string;
     grn: string;
     role : string;
     team: string;

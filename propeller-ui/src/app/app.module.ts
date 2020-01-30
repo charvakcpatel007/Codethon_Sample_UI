@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms'
 import { ProjectManagementComponent } from './AppComponent/project-management/project.managment.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ProjectManagementComponent } from './AppComponent/project-management/pr
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes, {useHash: true}),
     TabsModule.forRoot(),

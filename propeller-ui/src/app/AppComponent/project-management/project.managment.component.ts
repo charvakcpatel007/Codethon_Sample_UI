@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from './models/project.model';
 import { FDG_TYPE, TAI_TYPE, AccessEntity } from './models/access.entity.model';
 import { AccessBundle } from './models/access.bundle.model';
+import { DemoService } from 'src/app/services/demo.service';
 
 @Component({
   selector: 'project-managment',
@@ -15,23 +16,24 @@ export class ProjectManagementComponent implements OnInit {
 
   isProjectList: boolean = true;
 
-  constructor() { }
+  constructor(private ds : DemoService) { }
 
   ngOnInit() {
-    this.projects.push( {
-      name:"p1",
-      desc: "mymyt",
-      email:"mmcore",
-      accessBundles: [
-        {
-          name: "ab1",
-          desc:"its ab",
-          accessEntities: [
-            {type : FDG_TYPE, eondId:"71486", grn:"thegrn", group:"Wolf", role:"God", team:"alpha"}
-          ]
-        }
-      ]
-    } );
+    this.ds.getProjects().subscribe(res => this.projects = res as Project[])
+    // this.projects.push( {
+    //   name:"p1",
+    //   desc: "mymyt",
+    //   email:"mmcore",
+    //   accessBundles: [
+    //     {
+    //       name: "ab1",
+    //       desc:"its ab",
+    //       accessEntities: [
+    //         {type : FDG_TYPE, eondId:"71486", grn:"thegrn", group:"Wolf", role:"God", team:"alpha"}
+    //       ]
+    //     }
+    //   ]
+    // } );
     this.resetSelectedProject();
   }
 
@@ -45,7 +47,7 @@ export class ProjectManagementComponent implements OnInit {
           name: "",
           desc:"",
           accessEntities: [
-            {type : FDG_TYPE, eondId:"", grn:"", group:"", role:"", team:""}
+            {type : FDG_TYPE, eonId:"", grn:"", group:"", role:"", team:""}
           ]
         }
       ]
@@ -57,7 +59,7 @@ export class ProjectManagementComponent implements OnInit {
       name: "",
       desc:"",
       accessEntities: [
-        {type : FDG_TYPE, eondId:"", grn:"", group:"", role:"", team:""}
+        {type : FDG_TYPE, eonId:"", grn:"", group:"", role:"", team:""}
       ]
     })
   }
@@ -65,7 +67,7 @@ export class ProjectManagementComponent implements OnInit {
 
   addAccessEntity(ab : AccessBundle) {
     ab.accessEntities.push(
-      {type : FDG_TYPE, eondId:"", grn:"", group:"", role:"", team:""}
+      {type : FDG_TYPE, eonId:"", grn:"", group:"", role:"", team:""}
     )
   }
 
@@ -85,8 +87,9 @@ export class ProjectManagementComponent implements OnInit {
 
   submit(){
     console.log(this.selectedProject)
-    this.projects.push(this.selectedProject)
+    this.ds.addProject(this.selectedProject).subscribe( res => console.log(res))
     this.isProjectList = !this.isProjectList
+    this.ds.getProjects().subscribe(res => this.projects = res as Project[])
   }
 
 }
